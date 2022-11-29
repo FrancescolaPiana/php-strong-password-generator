@@ -1,17 +1,41 @@
 <?php
 
+$arrayLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'c', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+$arrayNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+$arraySpecials = ['!', '?', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '{', '[', '}', ']', ':', ';', '@', '#', '|', '<', ',', '>', '.', '?', '/'];
 
+// $moment = array_rand($arrayNumbers);
+// var_dump(array_rand($arrayLetters));
 
-if (isset($_GET['type']) && !empty($_GET['type'])) {
-    $temparr = [];
-    foreach ($hotels as $item) {
-        if ($item['parking'] == true) {
-            $temparr[] = $item;
+// var_dump($arrayLetters[array_rand($arrayLetters)]);
+
+if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
+    $password = '';
+    for ($i = 0; $i < $_POST['pswlength']; $i++) {
+        $rand = rand(1, 3);
+        // variabile 1 lettera
+        if ($rand == 1) {
+            $moment = array_rand($arrayLetters);
+            $rand2 = rand(1, 2);
+            if ($rand2 == 1) {
+                $password = $password . strtoupper($arrayLetters[$moment]);
+            } else {
+                $password = $password . $arrayLetters[$moment];
+            }
+        }
+        // variabile 2 numeri
+        elseif ($rand == 2) {
+            $moment = array_rand($arrayNumbers);
+            $password = $password . $arrayNumbers[$moment];
+        }
+        // variabile 3
+        else {
+            $moment = array_rand($arraySpecials);
+            $password = $password . $arraySpecials[$moment];
         }
     }
     ;
-    $hotels = $temparr;
-    // var_dump($comics);
+    // var_dump($password);
 }
 ;
 
@@ -36,24 +60,21 @@ if (isset($_GET['type']) && !empty($_GET['type'])) {
 </head>
 
 <body>
-    <!-- <header>
-        <form action="index.php" method="GET" name="formFilter">
-            <select name="type" id="type">
-                <option value="">No filter</option>
-                <option value="parking">Parking</option>
-            </select>
-            <select name="vote" id="vote">
-                <option value="">No filter</option>
-                <option value="1">Una stella</option>
-                <option value="2">Due stelle</option>
-                <option value="3">Tre stelle</option>
-                <option value="4">Quattro stelle</option>
-                <option value="5">Cinque stelle</option>
-            </select>
-            <button type="submit">Filtra</button>
+    <header>
+        <form action="index.php" method="POST" name="formFilter">
+            <button type="submit">Generate:</button>
+            <input placeholder="password length" type="number" name="pswlength" id="pswlength">
         </form>
+        <span>
+
+            <?php if (isset($password) && !empty($password)) { ?> 
+                <span class="psw">
+                    <?php echo "Pasword: $password" ?>;
+                </span>
+                <?php } ?> 
+        </span>
     </header>
-    <main> -->
+    <main>
 
     </main>
 </body>
@@ -63,7 +84,18 @@ if (isset($_GET['type']) && !empty($_GET['type'])) {
 <style>
     header {
         width: 1170px;
-        margin: 0 auto;
+        margin: 2rem auto;
+        display: flex;
+        gap: 5rem;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+    }
+
+    .psw {
+        background-color: lightgray;
+        padding: .5rem 1rem;
+        border-radius: .3rem;
     }
 
     main {
