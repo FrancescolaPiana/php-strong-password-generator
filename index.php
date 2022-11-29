@@ -1,44 +1,6 @@
 <?php
-
-$arrayLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'c', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-$arrayNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-$arraySpecials = ['!', '?', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '{', '[', '}', ']', ':', ';', '@', '#', '|', '<', ',', '>', '.', '?', '/'];
-
-// $moment = array_rand($arrayNumbers);
-// var_dump(array_rand($arrayLetters));
-
-// var_dump($arrayLetters[array_rand($arrayLetters)]);
-
-if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
-    $password = '';
-    for ($i = 0; $i < $_POST['pswlength']; $i++) {
-        $rand = rand(1, 3);
-        // variabile 1 lettera
-        if ($rand == 1) {
-            $moment = array_rand($arrayLetters);
-            $rand2 = rand(1, 2);
-            if ($rand2 == 1) {
-                $password = $password . strtoupper($arrayLetters[$moment]);
-            } else {
-                $password = $password . $arrayLetters[$moment];
-            }
-        }
-        // variabile 2 numeri
-        elseif ($rand == 2) {
-            $moment = array_rand($arrayNumbers);
-            $password = $password . $arrayNumbers[$moment];
-        }
-        // variabile 3
-        else {
-            $moment = array_rand($arraySpecials);
-            $password = $password . $arraySpecials[$moment];
-        }
-    }
-    ;
-    // var_dump($password);
-}
-;
-
+include './data/array.php';
+include './functions/logic.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,11 +29,11 @@ if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
         </form>
         <span>
 
-            <?php if (isset($password) && !empty($password)) { ?> 
-                <span class="psw">
-                    <?php echo "Pasword: $password" ?>;
-                </span>
-                <?php } ?> 
+            <?php if (isset($password) && !empty($password)) { ?>
+            <span class="psw">
+                <?php echo "Pasword: $password" ?>;
+            </span>
+            <?php } ?>
         </span>
     </header>
     <main>
@@ -80,8 +42,13 @@ if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
 </body>
 
 </html>
-
 <style>
+    body {
+        background-image: url(https://picsum.photos/1980/1080);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
     header {
         width: 1170px;
         margin: 2rem auto;
@@ -90,37 +57,13 @@ if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
         align-items: center;
         justify-content: center;
         height: 70vh;
+        background-color: rgba(10, 10, 10, .8);
+        border-radius: 1rem;
     }
 
     .psw {
         background-color: lightgray;
         padding: .5rem 1rem;
         border-radius: .3rem;
-    }
-
-    main {
-        display: flex;
-        gap: 42px;
-        flex-wrap: wrap;
-        width: 1170px;
-        /* background-color: rgba(20, 20, 20, .1); */
-        margin: 2rem auto;
-        padding: 0px;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-    }
-
-    h4 {
-        font-size: 1.2rem;
-    }
-
-    .card {
-        width: 200px;
-    }
-
-    img {
-        width: 200px;
     }
 </style>
