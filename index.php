@@ -1,6 +1,7 @@
 <?php
-include './data/array.php';
-include './functions/logic.php';
+session_start();
+include __DIR__ . './data/array.php';
+include __DIR__ . './functions/logic.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,22 +23,10 @@ include './functions/logic.php';
 </head>
 
 <body>
-    <header>
-        <form action="index.php" method="POST" name="formFilter">
-            <button type="submit">Generate:</button>
-            <input placeholder="password length" type="number" name="pswlength" id="pswlength">
-        </form>
-        <span>
-
-            <?php if (isset($password) && !empty($password)) { ?>
-            <span class="psw">
-                <?php echo "Pasword: $password" ?>;
-            </span>
-            <?php } ?>
-        </span>
-    </header>
     <main>
-
+        <?php
+        include __DIR__ . './partials/header.php';
+        ?>
     </main>
 </body>
 

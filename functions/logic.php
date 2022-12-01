@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
     $password = '';
     for ($i = 0; $i < $_POST['pswlength']; $i++) {
@@ -25,6 +26,9 @@ if (isset($_POST['pswlength']) && !empty($_POST['pswlength'])) {
         }
     }
     ;
+    session_start();
+    $_SESSION[`passwordgen`] = $password;
+    header('Location: ./success.php');
 }
 ;
 ?>
